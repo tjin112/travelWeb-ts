@@ -1,21 +1,21 @@
 import React, { useContext } from "react";
 import styles from "./Robot.module.css";
 import { appContext,appSetStateContext } from "../AppState";
-import { withAddToCart } from './AddToCart'
-export interface RobotProps {
+import {useAddToCart} from './AddToCart'
+// import {withAddToCart} from './AddToCart'
+interface RobotProps {
   id: number;
   name: string;
   email: string;
-  addToCart:(id,name)=>void
 }
-const Robots: React.FC<RobotProps> = ({ id, name, email,addToCart }) => {
+const RobotDiscount: React.FC<RobotProps> = ({ id, name, email }) => {
   // 使用 共享的数据
   const value = useContext(appContext);
-  // 使用共享的方法
-  
+  const addToCart = useAddToCart()
   return (
     <div className={styles.cardContainer}>
       <img src={`https://robohash.org/${id}`} alt="robot" />
+      <h2>discounted Items</h2>
       <h2>{name}</h2>
       <p>{email}</p>
       <p>{value.username}</p>
@@ -24,4 +24,4 @@ const Robots: React.FC<RobotProps> = ({ id, name, email,addToCart }) => {
   );
 };
 
-export default withAddToCart(Robots);
+export default RobotDiscount;
